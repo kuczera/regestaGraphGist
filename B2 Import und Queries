@@ -1,0 +1,50 @@
+= B2 Verwandtschaft im Graphen. Datenimport und Queries
+== B2.1 Verwandtschaft abbilden: Datenimport aus CSV
+=== Was ist eine CSV-Datei?
+Im GraphGist B1 haben Sie gelernt, Knoten und Kanten manuell anzulegen. Bei größeren Datenmengen - besonders, wenn die Daten schon in tabellarischer Form vorliegen - kann man sich viel Arbeit sparen, indem man Daten mit dem Befehl "LOAD CSV" importiert.
+CSV steht für "comma-seperated value". Die Datei enthält also Werte, die durch Kommata (oder ggf. ein anderes, definiertes Trennzeichen wie z.B. Tabstopp oder Semikolon) getrennt sind. Das Prinzip einer CSV-Datei entspricht einer Tabellenstruktur mit Zeilen und Spalten. 
+
+.So sehen die selben Daten in Tabellen- bzw. CSV-Format aus:
+[options="header"]
+|=======================
+|CSV|Tabelle
+|image::https://kuczera.github.io/GistsReader/Bilder/IdsUndEhepartnerCSVScreenshot.jpg[]|image::https://kuczera.github.io/GistsReader/Bilder/IdsUndEhepartnerTabelleScreenshot.jpg[]
+|=======================
+
+
+=== Struktur des LOAD CSV - Befehls 
+Der LOAD CSV-Befehl allein stellt nur die Daten in Cypher zur Verfügung, ohne dass daraus schon Knoten und Kanten erstellt würden. Mit den bereits bekannten Befehlen CREATE, MERGE oder MATCH spezifizieren wir, wie die Inhalte in Form von Knoten und Kanten miteinander in Beziehung gesetzt werden sollen. 
+
+[source,cypher]
+----
+MATCH (n) DETACH DELETE n
+LOAD CSV WITH HEADERS FROM          AS line 
+CREATE (p:Person {name:line.name
+
+----
+*bedeutet*: Leere die aktuelle Datenbank.
+Lade die Datei XYZ, zeilenweise. 
+Erstelle für jede Zeile einen Personenknoten, hier p genannt, mit den Properties "Name" gleich Inhalt der Spalte "name", 
+
+=== Knoten und Kanten separat laden
+Wenn Knoten, die aus verschiedenen Zeilen erstellt wurden, über ihre ID in Beziehung zueinander gesetzt werden, sollte man mindestens zwei separate "LOAD CSV" - Befehle ausführen: Im ersten Durchlauf werden nur die Knoten erstellt, erst wenn alle Knoten in der Datenbank bestehen generieren wir über den zweiten Befehl erste Kanten. So wird vermieden, dass Kanten zu einem Knoten erstellt werden sollen, der noch gar nicht vorhanden ist. 
+
+Bild: Tabelle mit Ehepartnern, die untereinander stehen und mit ID verknüpft sind
+
+Beispiel: 
+[source,cypher]
+----
+LOAD CSV WITH HEADERS FROM (hier ein Cypher Query zu Knoten)
+----
+*bedeutet*:
+
+Beispiel: 
+[source,cypher]
+----
+LOAD CSV WITH HEADERS FROM (hier ein Cypher Query zu Kanten) 
+*bedeutet*:
+----
+
+== B2.2 Verwandtschaft abfragen: Queries 
+=== Wer ist mit wem wie verwandt
+z.B. finde alle Nachfahren von X, wer ist mit Y verheiratet, shortest-path abfrage
