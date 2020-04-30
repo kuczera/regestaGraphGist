@@ -1,3 +1,13 @@
+== GraphGist for the first steps in the graph database using the regesta of emperor Frederick III.
+:author: Andreas Kuczera
+:twitter: andreaskuczera
+:tags: Graph Technologies, Digital Humanities, Medieval History
+:neo4j-version: 3.5
+
+=== First steps in the graph database using the http://www.regesta-imperii.de/en/home.html[regesta of emperor Frederick III.]
+
+image::https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Hans_Burgkmair_d._%C3%84._%28zugeschr.%29_-_Bildnis_Kaiser_Friedrich_III.jpg/490px-Hans_Burgkmair_d._%C3%84._%28zugeschr.%29_-_Bildnis_Kaiser_Friedrich_III.jpg[]
+
 = B2 Relationships in a Graph . Data Import and Queries
 == B2.1 Illustrate Relationship: Data import from CSV
 === What is a CSV file?
@@ -5,19 +15,22 @@ In GraphGist B1 you have learned to create nodes and edges manually. For larger 
 CSV stands for "comma-separated value". This means that the file contains values that are separated by commas (or possibly another, defined separator such as a tab stop or semicolon). The principle of a CSV file corresponds to a table structure with rows and columns.
 
 This is how the same data looks like in table or CSV format:
-[options="header"]
-|=======================
-|CSV|Table
-|image::https://kuczera.github.io/regestaGraphGist/images/IdsUndEhepartnerCSVScreenshot.jpg[]|image::https://kuczera.github.io/regestaGraphGist/images/IdsUndEhepartnerTabelleScreenshot.jpg[]
-|=======================
 
+[%header,cols=2*]
+|===
+|CSV
+|Table
 
-=== Structure of the LOAD CSV - Command
+a|image::https://kuczera.github.io/regestaGraphGist/images/IdsUndEhepartnerCSVScreenshot.jpg[CSV-Data]
+a|image::https://kuczera.github.io/regestaGraphGist/images/IdsUndEhepartnerTabelleScreenshot.jpg[Same CSV-Data in a table]|
+|===
+
+== Structure of the LOAD CSV - Command
 The LOAD CSV-Command alone provides only the data in Cypher without creating nodes and edges from it. With the already known commands CREATE, MERGE or MATCH we specify how the contents in the form of nodes and edges are to be related to each other.
 
 [source,cypher]
 ----
-MATCH (n) DETACH DELETE n
+MATCH (n) DETACH DELETE n;
 LOAD CSV WITH HEADERS FROM AS line
 CREATE (p:person {name:line.name})
 ----
@@ -25,7 +38,7 @@ CREATE (p:person {name:line.name})
 Load the file XYZ, line by line.
 For each line, create a Person-Type node, here called p, with the properties "name" equal to the content of the column "name",
 
-=== Load Nodes and Edges separately
+== Load Nodes and Edges separately
 If nodes created from different lines are related to each other by their ID, you should execute at least two separate "LOAD CSV"-Commands: In the first run only the nodes are created, only after all nodes exist in the database we generate the first edges by the second command. This avoids creating edges for a node that does not yet exist.
 
 Figure: Table with spouses, which are one below the other and linked with ID

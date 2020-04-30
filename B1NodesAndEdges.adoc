@@ -1,10 +1,10 @@
-== GraphGists to GraphReader
+== GraphGist for the first steps in the graph database using the regesta of emperor Frederick III.
 :author: Andreas Kuczera
 :twitter: andreaskuczera
 :tags: Graph Technologies, Digital Humanities, Medieval History
 :neo4j-version: 3.5
 
-=== First steps in the graph database using the http://www.regesta-imperii.de/en/home.html[regesta of Emperor Frederick III.]
+=== First steps in the graph database using the http://www.regesta-imperii.de/en/home.html[regesta of emperor Frederick III.]
 
 image::https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Hans_Burgkmair_d._%C3%84._%28zugeschr.%29_-_Bildnis_Kaiser_Friedrich_III.jpg/490px-Hans_Burgkmair_d._%C3%84._%28zugeschr.%29_-_Bildnis_Kaiser_Friedrich_III.jpg[]
 

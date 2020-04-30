@@ -25,7 +25,7 @@
   <carousel class="deck container-fluid">
     <!--slide class="row-fluid">
       <div class="col-sm-3">
-        <h3>B2 Relationships in a Graph . Data Import and Queries</h3>
+        <h3>GraphGist for the first steps in the graph database using the regesta of emperor Frederick III.</h3>
         <p class="lead">Information</p>
 			<!dl>
 				
@@ -42,6 +42,26 @@
       </div>
     </slide-->
     
+
+
+<slide class="row-fluid">
+  <div class="col-sm-12">
+    <h3>GraphGist for the first steps in the graph database using the regesta of emperor Frederick III.</h3>
+    <br/>
+    <div>
+      
+
+
+   <h4>First steps in the graph database using the <a href="http://www.regesta-imperii.de/en/home.html">regesta of emperor Frederick III.</a></h4>
+   <div class="imageblock">
+<div class="content">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Hans_Burgkmair_d._%C3%84._%28zugeschr.%29_-_Bildnis_Kaiser_Friedrich_III.jpg/490px-Hans_Burgkmair_d._%C3%84._%28zugeschr.%29_-_Bildnis_Kaiser_Friedrich_III.jpg" alt="490px Hans Burgkmair d. %C3%84. %28zugeschr.%29   Bildnis Kaiser Friedrich III">
+</div>
+</div>
+	</div>
+  </div>
+</slide>
+
 
 
    <h4>B2 Relationships in a Graph . Data Import and Queries</h4>
@@ -77,21 +97,36 @@ CSV stands for "comma-separated value". This means that the file contains values
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">image::https://kuczera.github.io/regestaGraphGist/images/IdsUndEhepartnerCSVScreenshot.jpg[]</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">image::https://kuczera.github.io/regestaGraphGist/images/IdsUndEhepartnerTabelleScreenshot.jpg[]</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img src="https://kuczera.github.io/regestaGraphGist/images/IdsUndEhepartnerCSVScreenshot.jpg" alt="CSV-Data">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img src="https://kuczera.github.io/regestaGraphGist/images/IdsUndEhepartnerTabelleScreenshot.jpg" alt="Same CSV-Data in a table">
+</div>
+</div></div></td>
 </tr>
 </tbody>
 </table>
+	</div>
+  </div>
+</slide>
 
 
 
-   <h4>Structure of the LOAD CSV - Command</h4>
-   <div class="paragraph">
+<slide class="row-fluid">
+  <div class="col-sm-12">
+    <h3>Structure of the LOAD CSV - Command</h3>
+    <br/>
+    <div>
+      <div class="paragraph">
 <p>The LOAD CSV-Command alone provides only the data in Cypher without creating nodes and edges from it. With the already known commands CREATE, MERGE or MATCH we specify how the contents in the form of nodes and edges are to be related to each other.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH (n) DETACH DELETE n
+<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH (n) DETACH DELETE n;
 LOAD CSV WITH HEADERS FROM AS line
 CREATE (p:person {name:line.name})<!--/code--></pre>
 </div>
@@ -101,11 +136,18 @@ CREATE (p:person {name:line.name})<!--/code--></pre>
 Load the file XYZ, line by line.
 For each line, create a Person-Type node, here called p, with the properties "name" equal to the content of the column "name",</p>
 </div>
+	</div>
+  </div>
+</slide>
 
 
 
-   <h4>Load Nodes and Edges separately</h4>
-   <div class="paragraph">
+<slide class="row-fluid">
+  <div class="col-sm-12">
+    <h3>Load Nodes and Edges separately</h3>
+    <br/>
+    <div>
+      <div class="paragraph">
 <p>If nodes created from different lines are related to each other by their ID, you should execute at least two separate "LOAD CSV"-Commands: In the first run only the nodes are created, only after all nodes exist in the database we generate the first edges by the second command. This avoids creating edges for a node that does not yet exist.</p>
 </div>
 <div class="paragraph">
