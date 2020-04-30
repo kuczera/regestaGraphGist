@@ -8,7 +8,7 @@ This is how the same data looks like in table or CSV format:
 [options="header"]
 |=======================
 |CSV|Table
-|image::https://kuczera.github.io/GistsReader/Bilder/IdsUndEhepartnerCSVScreenshot.jpg[]|image::https://kuczera.github.io/GistsReader/Bilder/IdsUndEhepartnerTabelleScreenshot.jpg[]
+|image::https://kuczera.github.io/regestaGraphGist/images/IdsUndEhepartnerCSVScreenshot.jpg[]|image::https://kuczera.github.io/regestaGraphGist/images/IdsUndEhepartnerTabelleScreenshot.jpg[]
 |=======================
 
 
