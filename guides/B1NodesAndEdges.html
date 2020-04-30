@@ -52,7 +52,7 @@
       
 
 
-   <h4>First steps in the graph database using the example of Emperor Frederick III.</h4>
+   <h4>First steps in the graph database using the <a href="http://www.regesta-imperii.de/en/home.html">regesta of Emperor Frederick III.</a></h4>
    <div class="imageblock">
 <div class="content">
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Hans_Burgkmair_d._%C3%84._%28zugeschr.%29_-_Bildnis_Kaiser_Friedrich_III.jpg/490px-Hans_Burgkmair_d._%C3%84._%28zugeschr.%29_-_Bildnis_Kaiser_Friedrich_III.jpg" alt="490px Hans Burgkmair d. %C3%84. %28zugeschr.%29   Bildnis Kaiser Friedrich III">
@@ -79,7 +79,7 @@
    <h4>Create and Find</h4>
    <div class="paragraph">
 <p>With the command "CREATE" you create a node, represented by two brackets: ()
-Within the brackets, you assign a variable to the node, e.g. "n" for "node": (n)
+Within the brackets, you assign a variable to the node, e.g. "n" for "node": (n). The n is followd by a double collon and then the type or the label of the node.
 Within this command you can now use "n" to refer to the created node. The variable remains valid only until the command is terminated with a semicolon. It is not saved afterwards and can be reassigned again and again.</p>
 </div>
 <div class="paragraph">
@@ -89,22 +89,22 @@ The semicolon closes the command.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->CREATE (n) RETURN n;<!--/code--></pre>
+<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->CREATE (n:Person) RETURN n;<!--/code--></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>means</strong>: "Create a node, here called n, and show me n."</p>
+<p><strong>means</strong>: "Create a node, here called n, of type Person and show me n."</p>
 </div>
 <div class="paragraph">
 <p>The "MERGE" command first checks whether a corresponding node already exists; if not, it is created again.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MERGE (n) RETURN n;<!--/code--></pre>
+<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MERGE (n:Person) RETURN n;<!--/code--></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>means</strong>: "Check if there are any nodes. If not, create one. Name the node n. Show me n."</p>
+<p><strong>means</strong>: "Check if there are a node of type Person. If not, create one and show me n."</p>
 </div>
 	</div>
   </div>
@@ -122,11 +122,11 @@ The semicolon closes the command.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH (n) DELETE n<!--/code--></pre>
+<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH (n:Person) DELETE n<!--/code--></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>means</strong>: "Find node, hereinafter called n, and delete n."</p>
+<p><strong>means</strong>: "Find node n with the label Person and delete n."</p>
 </div>
 <div class="paragraph">
 <p>This only works because our node has no connections (edges) to other nodes yet. To delete a node that is connected in the database, its edges must first be removed with the DETACH command.</p>
@@ -157,34 +157,9 @@ The semicolon closes the command.</p>
     <br/>
     <div>
       <div class="paragraph">
-<p>So far we cannot yet distinguish our nodes from each other.
-To differentiate them, we can first assign them to node types (e.g. person, letter, city&#8230;&#8203;) and provide them with individual properties (e.g. name, date of birth, material, longitude and latitude&#8230;&#8203;)
+<p>So far we can create nodes with labels.
+To add further informations to the nodes we provide them with individual properties (e.g. name, date of birth, place of living, place of death &#8230;&#8203;)
 The node types and properties are not predefined and can be created as required. (Cf.: Data Modeling).</p>
-</div>
-<div class="paragraph">
-<p>We now extend the creation command we learned above with a node type:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->CREATE (n:Person) RETURN n;<!--/code--></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>means</strong>: "Create a person-type node, here called n, and show me n."</p>
-</div>
-	</div>
-  </div>
-</slide>
-
-
-
-<slide class="row-fluid">
-  <div class="col-sm-12">
-    <h3>Add Properties to existing nodes or Create with Properties</h3>
-    <br/>
-    <div>
-      <div class="paragraph">
-<p>In properties you can save further information. For nodes that represent persons, it would make sense to create properties such as "Name", "Date of birth" and "Date of death".</p>
 </div>
 <div class="paragraph">
 <p>There are two ways to add properties: When you create the nodes or afterwards.</p>
@@ -195,20 +170,34 @@ The node types and properties are not predefined and can be created as required.
 </div>
 </div>
 <div class="paragraph">
-<p><strong>means</strong>: "Create a Person-type node with the property name Friedrich, here called f, and show me f."</p>
+<p><strong>means</strong>: "Create a Person-type node with the property name and the value "Friedrich" and show it to me."</p>
 </div>
-<div class="paragraph">
+	</div>
+  </div>
+</slide>
+
+
+
+<slide class="row-fluid">
+  <div class="col-sm-12">
+    <h3>Set property later</h3>
+    <br/>
+    <div>
+      <div class="paragraph">
 <p>Now, if we want to give Friedrich another property, we add it with SET. It is important that we do not close the command with a semicolon as above, as long as we still want to refer to the node using the variable f.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MATCH (f:Person {name:'Friedrich'})
-SET for date of birth = '1415-09-21
+SET dateOfBirth = '1415-09-21
 RETURN f;<!--/code--></pre>
 </div>
 </div>
 <div class="paragraph">
 <p><strong>means</strong>: "Find a Person-type node where the property 'name' contains the value 'Friedrich', the node is called 'f' in the following. For 'f', create the property 'date of birth' with the value '1415-09-21'. Show me f."</p>
+</div>
+<div class="paragraph">
+<p><strong>INFO</strong>: Labels are written with the first Charakter uppercase, properties are written in lowercase or in camelcase like dateOfBirth as Whitespaces are not allowed.</p>
 </div>
 	</div>
   </div>
@@ -355,15 +344,31 @@ RETURN *;<!--/code--></pre>
 
    <h4>Create and Find</h4>
    <div class="paragraph">
-<p>An edge (connection, relation) between two nodes is represented in Cypher with an arrow: -->
-The edge always has a direction.
-Furthermore, the edge type must also be specified. -[:CHILD_OF]-></p>
+<p>An edge (connection, relation) between two nodes is represented in Cypher with an arrow:</p>
+</div>
+<div class="paragraph">
+<p>--></p>
+</div>
+<div class="paragraph">
+<p>The edge always has a direction.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, the edge type must also be specified. -[:CHILD_OF]-></p>
+</div>
+<div class="paragraph">
+<p><strong>INFO</strong>: The type of an edge is written in uppercase.</p>
 </div>
 <div class="paragraph">
 <p>Edges, just like nodes, are created with the CREATE or MERGE commands and searched in the database with MATCH.</p>
 </div>
 <div class="paragraph">
-<p>An edge between two nodes looks like this in Cypher: (f)-[:CHILD_OF]->(e)</p>
+<p>An edge between two nodes looks like this in Cypher:</p>
+</div>
+<div class="paragraph">
+<p>(f)-[r:CHILD_OF]->(e)</p>
+</div>
+<div class="paragraph">
+<p>Here the edge has the variable r. This is important to address the edge if he is used in the following commands.</p>
 </div>
 <div class="paragraph">
 <p>To create an edge, we have to create the corresponding nodes with MERGE or CREATE or call them from the database with MERGE or MATCH. MERGE is always the safest way for small amounts of data.</p>
@@ -392,9 +397,9 @@ RETURN *;<!--/code--></pre>
 </div>
 <div class="paragraph">
 <p><strong>means</strong>:
-"Find or create  a node of type Person with the property name "Friedrich", hereinafter referred to as f.<br>
-Find or create a node of type Person with the property name "Cimburgis", in the following called c<br>
-Find or create a node of type Person with the property name "Ernst", hereinafter referred to as e.<br>
+"Find or create  a node of type Person with the property name "https://en.wikipedia.org/wiki/Frederick_III,<em>Holy_Roman_Emperor[Friedrich]", hereinafter referred to as f.<br>
+Find or create a node of type Person with the property name "https://en.wikipedia.org/wiki/Cymburgis_of_Masovia[Cimburgis]", in the following called c<br>
+Find or create a node of type Person with the property name "https://en.wikipedia.org/wiki/Ernest_of_Austria</em>(Habsburg)[Ernest]", hereinafter referred to as e.<br>
 Create an edge of the type "child of" from f to c.<br>
 Create an edge of type "child of" from f to e.<br>
 Show me everything that was just found or created."</p>
@@ -414,8 +419,8 @@ Show me everything that was just found or created."</p>
 <div class="content">
 <pre mode="cypher"  class="highlight pre-scrollable programlisting cm-s-neo code runnable standalone-example ng-binding" data-lang="cypher" lang="cypher"><!--code class="cypher language-cypher"-->MERGE (c:Person {name:'Cimburgis'})
 MERGE (e:Person {name:'Ernst'})
-CREATE (e)-[:MARRIED_WITH]-&gt;(c)
-CREATE (c)-[:MARRIED_WITH]-&gt;(e)
+CREATE (e)-[:SPOUSE_OF]-&gt;(c)
+CREATE (c)-[:SPOUSE_OF]-&gt;(e)
 RETURN *;<!--/code--></pre>
 </div>
 </div>
@@ -423,12 +428,12 @@ RETURN *;<!--/code--></pre>
 <p><strong>means</strong>:
 "Find or create a node of type "person", here called c, where the property name is "Cimburgis".<br>
 Find or create a node of type "person", here called e, where the property name is "Ernst".<br>
-Create an edge of type "married to" from e to c.<br>
-Create an edge of type "married to" from c to e.<br>
+Create an edge of type "SPOUSE_OF" from e to c.<br>
+Create an edge of type "SPOUSE_OF" from c to e.<br>
 Show me everything that was just found or created."</p>
 </div>
 <div class="paragraph">
-<p>*By the way: Since edges in Cypher always have one direction, but a marriage is based on reciprocity, we create "Married to" edges twice, i.e. once in each direction.</p>
+<p>*By the way: Since edges in Cypher always have one direction, but a marriage is based on reciprocity, we create "SPOUSE_OF" edges twice, i.e. once in each direction.</p>
 </div>
 	</div>
   </div>
