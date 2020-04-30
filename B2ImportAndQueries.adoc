@@ -1,0 +1,49 @@
+= B2 Relationships in a Graph . Data Import and Queries
+== B2.1 Illustrate Relationship: Data import from CSV
+=== What is a CSV file?
+In GraphGist B1 you have learned to create nodes and edges manually. For larger amounts of data - especially if the data is already in tabular form - you can save a lot of work by importing data with the command "LOAD CSV".
+CSV stands for "comma-separated value". This means that the file contains values that are separated by commas (or possibly another, defined separator such as a tab stop or semicolon). The principle of a CSV file corresponds to a table structure with rows and columns.
+
+This is how the same data looks like in table or CSV format:
+[options="header"]
+|=======================
+|CSV|Table
+|image::https://kuczera.github.io/GistsReader/Bilder/IdsUndEhepartnerCSVScreenshot.jpg[]|image::https://kuczera.github.io/GistsReader/Bilder/IdsUndEhepartnerTabelleScreenshot.jpg[]
+|=======================
+
+
+=== Structure of the LOAD CSV - Command
+The LOAD CSV-Command alone provides only the data in Cypher without creating nodes and edges from it. With the already known commands CREATE, MERGE or MATCH we specify how the contents in the form of nodes and edges are to be related to each other.
+
+[source,cypher]
+----
+MATCH (n) DETACH DELETE n
+LOAD CSV WITH HEADERS FROM AS line
+CREATE (p:person {name:line.name})
+----
+*means*: Empty the current database.
+Load the file XYZ, line by line.
+For each line, create a Person-Type node, here called p, with the properties "name" equal to the content of the column "name",
+
+=== Load Nodes and Edges separately
+If nodes created from different lines are related to each other by their ID, you should execute at least two separate "LOAD CSV"-Commands: In the first run only the nodes are created, only after all nodes exist in the database we generate the first edges by the second command. This avoids creating edges for a node that does not yet exist.
+
+Figure: Table with spouses, which are one below the other and linked with ID
+
+Example:
+[source,cypher]
+----
+LOAD CSV WITH HEADERS FROM (here a Cypher Query for nodes)
+----
+*means*:
+
+Example:
+[source,cypher]
+----
+LOAD CSV WITH HEADERS FROM (here a Cypher Query on edges)
+----
+*means*:
+
+== B2.2 Query Relationship: Queries
+=== Who is related to Whom and How
+e.g. find all descendants of X, who is married to Y, shortest-path query
