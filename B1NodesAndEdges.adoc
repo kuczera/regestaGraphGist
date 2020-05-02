@@ -214,7 +214,7 @@ Show me everything that was just found or created."
 ----
 MERGE (f:Person {name:'Friedrich'})
 MERGE (e:Person {name: 'Eleonore'})
-MERGE (k:Person {name: 'Gwendolyn')
+MERGE (k:Person {name: 'Gwendolyn'})
 MERGE (m:Person {name:'Maximilian'})
 
 CREATE (f)-[:MARRIED_WITH]->(e)
