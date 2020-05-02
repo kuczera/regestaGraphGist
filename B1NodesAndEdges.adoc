@@ -133,7 +133,7 @@ MATCH (f:Person {name:'Friedrich'})
 SET f.DateOfBirth = '1415-09-21'
 
 MATCH (e:Person {name:'Ernst'})
-SET e.DateOfBirth = '1377'.
+SET e.DateOfBirth = '1377'
 
 MATCH (c:Person {name:'Cymburgis'})
 SET c.DateOfBirth = '1394
