@@ -136,7 +136,7 @@ MATCH (e:Person {name:'Ernst'})
 SET e.DateOfBirth = '1377'
 
 MATCH (c:Person {name:'Cymburgis'})
-SET c.DateOfBirth = '1394
+SET c.DateOfBirth = '1394'
 RETURN *;
 ----
 
