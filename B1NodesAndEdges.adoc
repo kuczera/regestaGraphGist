@@ -75,7 +75,7 @@ Now, if we want to give Friedrich another property, we add it with SET. It is im
 [source,cypher]
 ----
 MATCH (f:Person {name:'Friedrich'})
-SET dateOfBirth = '1415-09-21
+SET dateOfBirth = '1415-09-21'
 RETURN f;
 ----
 *means*: "Find a Person-type node where the property 'name' contains the value 'Friedrich', the node is called 'f' in the following. For 'f', create the property 'date of birth' with the value '1415-09-21'. Show me f."
